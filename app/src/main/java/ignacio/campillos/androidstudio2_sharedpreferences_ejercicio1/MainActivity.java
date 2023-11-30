@@ -42,16 +42,25 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sp.edit();
 
                     editor.putString(Constantes.USUARIO, usuario);
-                    editor.putString(Constantes.PASSWORD, password);
+                    editor.putString(Constantes.PASSWORD, codificarContrasenya(password));
                     editor.apply();
 
                     binding.txtPasswordMain.setText("");
                     binding.txtUsernameMain.setText("");
                     startActivity(new Intent(MainActivity.this, SecondActivity.class));
                 }
-
             }
         });
+    }
+    private String codificarContrasenya(String password){
+        String resultado;
+        try {
+             resultado = new String(Base64.getEncoder().encode(password.getBytes("UTF8")), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return resultado;
     }
 
     private void comprobarLogeo() {

@@ -45,7 +45,7 @@ public class SecondActivity extends AppCompatActivity {
         String resultado = null;
 
         try {
-            resultado = new String(Base64.getDecoder().decode(codigo.getBytes("UTF-8")),"UTF-8");
+            resultado = new String(Base64.getDecoder().decode(codigo.getBytes("UTF8")),"UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -54,7 +54,9 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void rellenarInformacion() {
+         String password = descodificar(sp.getString(Constantes.PASSWORD, ""));
+
         binding.lbUsuarioSecond.setText(sp.getString(Constantes.USUARIO,""));
-        binding.lbPasswordSecond.setText(sp.getString(Constantes.PASSWORD,""));
+        binding.lbPasswordSecond.setText(password);
     }
 }
